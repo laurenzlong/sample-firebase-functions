@@ -1,7 +1,9 @@
 const chai = require('chai');
 const expect = chai.expect;
-const chaiAsPromised = require("chai-as-promised");
+const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
+const sinon = require('sinon');
+
 const notifyUser = require('../notifyUser');
 
 describe('my functions', () => {
