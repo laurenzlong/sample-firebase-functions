@@ -19,6 +19,7 @@
     "chai-as-promised": "^7.1.1",
     "firebase-functions-test": "https://storage.googleapis.com/functions-dev-preview/firebase-functions-test-0.1.0-preview2.tgz",
     "mocha": "^5.0.5",
-    "sinon": "^4.4.8"
+    "sinon": "^4.4.8",
+    "supertest": "^3.0.0"
   }
 }

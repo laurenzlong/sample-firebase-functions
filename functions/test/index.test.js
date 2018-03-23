@@ -7,6 +7,7 @@ const sinon = require('sinon');
 const notifyUser = require('../notifyUser');
 const functions = require('firebase-functions');
 const test = require('firebase-functions-test')(require('./firebaseConfig.json'));
+const request = require('supertest');
 
 describe('my functions', () => {
   const myFunctions = require('../index');
@@ -26,6 +27,11 @@ describe('my functions', () => {
       wrapped(snap, { params: { uid: uid } });
 
       expect(spy.calledWith(uid, message));
+    });
+
+    it('sends 200 response', () => {
+      request(myFunctions.webhook)
+        .get('/')
     });
   });
 });
