@@ -13,10 +13,6 @@ describe('my functions', () => {
       sinon.spy(notifyUser);
     });
 
-    after(() => {
-      notifyUser.restore();
-    });
-
     it('calls notifyUser with the correct uid and message', () => {
       const uid = 'abc';
       const message = 'hello';
