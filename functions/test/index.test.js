@@ -4,10 +4,8 @@ const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 const sinon = require('sinon');
 
-const notifyUser = require('../notifyUser');
-
 describe('my functions', () => {
-  // import your functions here
+  const myFunctions = require('../index.js');
 
   after(() => {
     // add clean up code
@@ -16,7 +14,7 @@ describe('my functions', () => {
   describe('tellUser', () => {
     let spy;
     before(() => {
-      spy = sinon.spy(notifyUser);
+      spy = sinon.spy(myFunctions, 'notifyUser');
     });
 
     it('calls notifyUser with the correct uid and message', () => {
