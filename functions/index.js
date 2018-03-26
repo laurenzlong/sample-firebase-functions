@@ -7,6 +7,9 @@ exports.tellUser = functions.firestore.document('users/{uid}').onCreate((snap, c
 });
 
 exports.webhook = functions.https.onRequest( (req, res) => {
+  const admin = require('firebase-admin');
+  admin.initializeApp();
+
   const id = req.params.id;
   admin.firestore().collection('text-list')
     .doc(id)
