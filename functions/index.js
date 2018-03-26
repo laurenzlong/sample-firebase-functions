@@ -1,5 +1,4 @@
 const functions = require('firebase-functions');
-const notifyUser = require('./notifyUser');
 
 exports.tellUser = functions.firestore.document('users/{uid}').onCreate((snap, context) => {
   const uid = context.params.uid;
