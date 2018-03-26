@@ -3,7 +3,7 @@ const notifyUser = require('./notifyUser');
 
 exports.tellUser = functions.firestore.document('users/{uid}').onCreate((snap, context) => {
   const uid = context.params.uid;
-  return notifyUser(uid, snap.get('message'));
+  return exports.notifyUser(uid, snap.get('message'));
 });
 
 exports.webhook = functions.https.onRequest((req, res) => {
@@ -15,3 +15,7 @@ exports.webhook = functions.https.onRequest((req, res) => {
     .set({ data: 'new data' })
     .then(() => res.send({ message: 'Data updated.' }));
 });
+
+exports.notifyUser = (uid, message) => {
+  console.log('notifying', uid, 'with message:', message);
+};
