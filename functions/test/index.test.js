@@ -11,7 +11,7 @@ describe('my functions', () => {
 
   after(() => {
     // add clean up code
-  })
+  });
 
   describe('tellUser', () => {
     let spy;
