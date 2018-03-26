@@ -24,7 +24,7 @@ describe('my functions', () => {
       const message = 'hello';
 
       // add code
-      return expect(spy.calledWith(uid, message));
+      return expect(spy.calledWith(uid, message)).to.be.true;
     });
   });
   
