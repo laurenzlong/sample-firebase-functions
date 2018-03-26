@@ -6,13 +6,12 @@ exports.tellUser = functions.firestore.document('users/{uid}').onCreate((snap, c
   return notifyUser(uid, snap.get('message'));
 });
 
-exports.webhook = functions.https.onRequest( (req, res) => {
+exports.webhook = functions.https.onRequest((req, res) => {
   const admin = require('firebase-admin');
   admin.initializeApp();
 
-  const id = req.params.id;
   admin.firestore().collection('text-list')
-    .doc(id)
-    .update(req.body)
-    .then(() => res.status(200).json({ message: 'Data updated.' }));
+    .doc('123')
+    .set({ data: 'new data' })
+    .then(() => res.send({ message: 'Data updated.' }));
 });

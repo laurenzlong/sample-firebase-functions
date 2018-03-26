@@ -5,12 +5,15 @@ chai.use(chaiAsPromised);
 const sinon = require('sinon');
 
 const notifyUser = require('../notifyUser');
-const functions = require('firebase-functions');
 const test = require('firebase-functions-test')(require('./firebaseConfig.json'));
 const request = require('supertest');
 
 describe('my functions', () => {
   const myFunctions = require('../index');
+
+  after(() => {
+    test.cleanUp();
+  })
 
   describe('tellUser', () => {
     let spy;
@@ -23,15 +26,18 @@ describe('my functions', () => {
       const message = 'hello';
       const tellUser = myFunctions.tellUser;
       const wrapped = test.wrap(tellUser);
-      const snap = functions.firestore.makeDocumentSnapshot({ message: message }, 'uid/' + uid);
+      const snap = test.firestore.makeDocumentSnapshot({ message: message }, 'uid/' + uid);
       wrapped(snap, { params: { uid: uid } });
 
-      expect(spy.calledWith(uid, message));
+      return expect(spy.calledWith(uid, message));
     });
-
-    it('sends 200 response', () => {
+  });
+  
+  describe('webhook', () => {
+    it('sends 200 response', done => {
       request(myFunctions.webhook)
-        .get('/')
+        .post('/')
+        .expect(200, done);
     });
   });
 });
